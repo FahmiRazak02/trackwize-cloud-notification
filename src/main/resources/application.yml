@@ -1,0 +1,36 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: trackwize-cloud-notification
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/trackwize_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: TrackWize@12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  artemis:
+    mode: native
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    receive-timeout: 5000
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.trackwize.userservice.model
+
+jwt:
+  secret: xY75xfcUBuUt2fqB0pK/3194y319IJN==SIbASFi4as35SD=
+  defaultAccessTokenTimeout: 1800          #15minit
+  defaultRefreshTokenTimeout: 2592000    #30 days
+
+smtp:
+  host: smtp.gmail.com
+  port: 587
+  username: email
+  password: app-password

@@ -1,0 +1,40 @@
+services:
+  mysql:
+    image: mysql
+    container_name: trackwize-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: TrackWize@12345
+      MYSQL_DATABASE: trackwize_db
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - ./mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: trackwize-redis
+    ports:
+      - "6379:6379"
+    command: [ "redis-server", "--appendonly", "yes" ]
+    volumes:
+      - ./redis_data:/data
+    restart: unless-stopped
+
+  activemq:
+    image: apache/activemq-artemis:2.37.0
+    container_name: trackwize-activemq
+    environment:
+      - ARTEMIS_USER=admin
+      - ARTEMIS_PASSWORD=admin
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
