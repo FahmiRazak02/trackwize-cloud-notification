@@ -23,7 +23,7 @@ services:
     restart: unless-stopped
 
   activemq:
-    image: apache/activemq-artemis:2.37.0
+    image: apache/activemq-artemis
     container_name: trackwize-activemq
     environment:
       - ARTEMIS_USER=admin

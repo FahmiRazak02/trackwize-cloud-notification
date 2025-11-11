@@ -19,6 +19,9 @@ spring:
     user: admin
     password: admin
     receive-timeout: 5000
+    queues:
+      email: ntf_email_queue
+      inbox: ntf_inbox_queue
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -32,10 +35,5 @@ jwt:
 smtp:
   host: smtp.gmail.com
   port: 587
-  username: email
-  password: app-password
-
-app:
-  queue:
-    email: notification_email_queue
-    inbox: notification_inbox_queue
+  username: fahmirazak0201@gmail.com
+  password: fpha ritj rner zrox

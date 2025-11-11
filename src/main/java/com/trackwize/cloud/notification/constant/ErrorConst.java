@@ -67,4 +67,13 @@ public class ErrorConst {
     public static final String INVALID_REFRESH_TOKEN_CODE = "20012";
     public static final String INVALID_REFRESH_TOKEN_MSG = "Refresh token is invalid";
 
+
+    //    NOTIFICATION ERROR CODE - 30001 to 39999
+
+    public static final String NOTIFICATION_ERROR_CODE = "30001";
+    public static final String NOTIFICATION_ERROR_MSG = "Notification error";
+
+    public static final String INVALID_TYPE_CODE = "30002";
+    public static final String INVALID_TYPE_MSG = "Invalid Notification Type";
+
 }

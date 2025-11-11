@@ -55,18 +55,17 @@ public class LoggingAdvice implements ResponseBodyAdvice<Object> {
             servletResponse.setHeader("X-Processing-Time", durationMs + "ms");
 
             // --- Prepare log context ---
-            String trackingId = servletResponse.getHeader("X-Tracking-ID");
             String userId = servletResponse.getHeader("X-User-ID");
 
             // --- Log response details ---
-            log.info("[{}] Outgoing response: status={}, userId={}, time={}ms, headers={}, body={}",
-                    trackingId != null ? trackingId : "-",
+            log.info("Outgoing response: status={}, userId={}, time={}ms, headers={}, body={}",
                     servletResponse.getStatus(),
                     userId != null ? userId : "anonymous",
                     durationMs,
                     formatHeaders(servletResponse),
                     formatBody(body)
             );
+            log.info("\n");
 
         } catch (Exception e) {
             log.warn("Failed to log response: {}", e.getMessage());

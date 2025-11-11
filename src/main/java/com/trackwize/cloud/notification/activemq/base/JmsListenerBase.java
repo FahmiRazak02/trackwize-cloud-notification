@@ -14,10 +14,14 @@ public abstract class JmsListenerBase {
 
     public final void handle(Message message) throws JMSException {
         Instant start = Instant.now();
+        String trackingId = message.getJMSCorrelationID();
         String messageId = getMessageId(message);
         String destination = getDestination(message);
 
-        MDC.put("messageContext", "[messageId=%s, destination=%s]".formatted(messageId, destination));
+        MDC.put("trackingId", trackingId != null ? trackingId : messageId);
+        MDC.put("destination", destination);
+
+        log.info("[{}] Received message with trackingId={}", destination, trackingId);
 
         try {
             onMessage(message);
@@ -30,7 +34,7 @@ public abstract class JmsListenerBase {
         }
     }
 
-    protected abstract void onMessage(Message message) throws JMSException;
+    protected abstract void onMessage(Message message) throws Exception;
 
     private String getMessageId(Message message) {
         try {
