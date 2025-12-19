@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.trackwize.cloud</groupId>
-	<artifactId>trackwize-cloud-notification</artifactId>
+	<artifactId>trackwize-notification-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>notification</name>
+	<name>trackwize-notification-service</name>
 	<description>Notification Service for TrackWize</description>
 	<url/>
 	<licenses>
