@@ -2,9 +2,9 @@ package com.trackwize.notification.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.trackwize.notification.constant.ErrorConst;
-import com.trackwize.notification.constant.NotificationConst;
-import com.trackwize.notification.exception.TrackWizeException;
+import com.trackwize.common.constant.ErrorConst;
+import com.trackwize.common.constant.NotificationConst;
+import com.trackwize.common.exception.TrackWizeException;
 import com.trackwize.notification.model.dto.NotificationReqDTO;
 import jakarta.jms.JMSException;
 import jakarta.jms.TextMessage;

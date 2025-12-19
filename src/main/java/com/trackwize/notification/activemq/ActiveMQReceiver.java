@@ -1,8 +1,8 @@
 package com.trackwize.notification.activemq;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.trackwize.notification.activemq.base.JmsListenerBase;
-import com.trackwize.notification.exception.TrackWizeException;
+import com.trackwize.common.exception.TrackWizeException;
+import com.trackwize.common.jms.JmsListenerBase;
 import com.trackwize.notification.service.NotificationService;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;

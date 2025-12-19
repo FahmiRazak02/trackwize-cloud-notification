@@ -1,6 +1,6 @@
 package com.trackwize.notification.service;
 
-import com.trackwize.notification.constant.NotificationConst;
+import com.trackwize.common.constant.NotificationConst;
 import com.trackwize.notification.model.dto.NotificationReqDTO;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
