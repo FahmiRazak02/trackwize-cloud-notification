@@ -70,7 +70,9 @@ public class EmailService {
         int template = reqDTO.getTemplate();
         return switch (template) {
             case NotificationConst.PASSWORD_RESET_TEMPLATE -> resetPasswordContent(reqDTO.getContents());
+            case NotificationConst.ACCOUNT_CREATION_TEMPLATE -> accountCreationContent(reqDTO.getContents());
             case NotificationConst.ACCOUNT_VERIFICATION_TEMPLATE -> accountVerificationContent(reqDTO.getContents());
+            case NotificationConst.ACCOUNT_ACTIVATION_TEMPLATE -> accountActivationContent(reqDTO.getContents());
             default -> {
                 log.warn("Unexpected Template Type: [template]{}", template);
                 throw new TrackWizeException(
@@ -80,6 +82,28 @@ public class EmailService {
             }
         };
 
+    }
+
+    private String accountActivationContent(Map<String, Object> contents) {
+        String title = (String) contents.getOrDefault("title", "Notification");
+        String message = (String) contents.getOrDefault("message", "Please review the details below.");
+
+        return "<html><body>" +
+                "<h3>" + title + "</h3>" +
+                "<p>" + message + "</p>" +
+                "</body></html>";
+    }
+
+    private String accountCreationContent(Map<String, Object> contents) {
+        String title = (String) contents.getOrDefault("title", "Notification");
+        String message = (String) contents.getOrDefault("message", "Please review the details below.");
+        String name = (String) contents.get("name");
+
+        return "<html><body>" +
+                "<h2> Hi! " + name + "</h2>" +
+                "<h3>" + title + "</h3>" +
+                "<p>" + message + "</p>" +
+                "</body></html>";
     }
 
     private String accountVerificationContent(Map<String, Object> contents) {
@@ -97,7 +121,7 @@ public class EmailService {
                 .append("<p>").append(message).append("</p>");
 
         if (token != null && !token.isEmpty()) {
-            sb.append("<p><a href=\"").append(link).append("\">Account Verification</a></p>");
+            sb.append("<p><a href=\"").append(link).append("\">Account Created</a></p>");
         }
 
         sb.append("<br><p>This link will expire in ").append(expiry).append(" minutes.</p>")
