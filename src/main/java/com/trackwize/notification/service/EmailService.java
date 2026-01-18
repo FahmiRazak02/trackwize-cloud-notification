@@ -70,9 +70,9 @@ public class EmailService {
         int template = reqDTO.getTemplate();
         return switch (template) {
             case NotificationConst.PASSWORD_RESET_TEMPLATE -> resetPasswordContent(reqDTO.getContents());
-            case NotificationConst.ACCOUNT_CREATION_TEMPLATE -> accountCreationContent(reqDTO.getContents());
-            case NotificationConst.ACCOUNT_VERIFICATION_TEMPLATE -> accountVerificationContent(reqDTO.getContents());
-            case NotificationConst.ACCOUNT_ACTIVATION_TEMPLATE -> accountActivationContent(reqDTO.getContents());
+            case NotificationConst.ACCOUNT_IS_CREATED_TEMPLATE -> accountIsCreatedContent(reqDTO.getContents());
+            case NotificationConst.ACCOUNT_IS_VERIFIED_TEMPLATE -> accountIsVerifiedContent(reqDTO.getContents());
+            case NotificationConst.ACCOUNT_IS_ACTIVATE_TEMPLATE -> accountIsActivateContent(reqDTO.getContents());
             default -> {
                 log.warn("Unexpected Template Type: [template]{}", template);
                 throw new TrackWizeException(
@@ -84,7 +84,7 @@ public class EmailService {
 
     }
 
-    private String accountActivationContent(Map<String, Object> contents) {
+    private String accountIsActivateContent(Map<String, Object> contents) {
         String title = (String) contents.getOrDefault("title", "Notification");
         String message = (String) contents.getOrDefault("message", "Please review the details below.");
 
@@ -94,7 +94,7 @@ public class EmailService {
                 "</body></html>";
     }
 
-    private String accountCreationContent(Map<String, Object> contents) {
+    private String accountIsCreatedContent(Map<String, Object> contents) {
         String title = (String) contents.getOrDefault("title", "Notification");
         String message = (String) contents.getOrDefault("message", "Please review the details below.");
         String name = (String) contents.get("name");
@@ -106,7 +106,7 @@ public class EmailService {
                 "</body></html>";
     }
 
-    private String accountVerificationContent(Map<String, Object> contents) {
+    private String accountIsVerifiedContent(Map<String, Object> contents) {
         String title = (String) contents.getOrDefault("title", "Notification");
         String message = (String) contents.getOrDefault("message", "Please review the details below.");
         String token = (String) contents.get("token");
