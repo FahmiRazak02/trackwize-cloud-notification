@@ -1,8 +1,12 @@
 package com.trackwize.notification.activemq;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.trackwize.common.exception.TrackWizeException;
 import com.trackwize.common.jms.JmsListenerBase;
+import com.trackwize.common.util.LogUtil;
+import com.trackwize.notification.model.dto.NotificationReqDTO;
 import com.trackwize.notification.service.NotificationService;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
@@ -22,8 +26,13 @@ public class ActiveMQReceiver extends JmsListenerBase {
 
     @JmsListener(destination = "${spring.artemis.queues.email}", containerFactory = "jmsListenerContainerFactory")
     public void handleEmail(TextMessage message) throws Exception {
-        log.info("[EmailQueue] Received: {}", message.getText());
-        log.info("[EmailQueue] CorrelationID: {}", message.getJMSCorrelationID());
+        ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+
+        log.info(LogUtil.repeatCharLine('=', 117));
+        log.info("[EmailQueue] Received    : {}", "ntf_email_queue");
+        log.info("[EmailQueue] trackingId  : {}", message.getJMSCorrelationID());
+        log.info(LogUtil.repeatCharLine('=', 117));
+
         super.handle(message);
     }
 

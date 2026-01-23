@@ -27,7 +27,7 @@ public class NotificationService {
         NotificationReqDTO reqDTO = mapper.readValue(message.getText(), NotificationReqDTO.class);
         log.info("Template: {}", reqDTO.getTemplate());
         log.info("Notification Type: {}", reqDTO.getNotificationType());
-        log.info("NotificationReqDTO: [{}]", reqDTO);
+        log.info("Recipient: {}", reqDTO.getRecipient());
 
         switch (reqDTO.getNotificationType()) {
             case NotificationConst.EMAIL_NTF_TYPE:

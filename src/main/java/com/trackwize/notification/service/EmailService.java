@@ -100,8 +100,8 @@ public class EmailService {
         String name = (String) contents.get("name");
 
         return "<html><body>" +
-                "<h2> Hi! " + name + "</h2>" +
-                "<h3>" + title + "</h3>" +
+                "<h2>" + title + "</h2>" +
+                "<h3> Hi! " + name + "</h3>" +
                 "<p>" + message + "</p>" +
                 "</body></html>";
     }
@@ -111,13 +111,13 @@ public class EmailService {
         String message = (String) contents.getOrDefault("message", "Please review the details below.");
         String token = (String) contents.get("token");
         String name = (String) contents.get("name");
-        String link = "http://localhost:8080/reg/verify-account?token=" + token;
+        String link = "http://localhost:8088/api/v1/reg/verify-account?token=" + token;
         String expiry = String.valueOf(contents.getOrDefault("expiry", "30"));
 
         StringBuilder sb = new StringBuilder();
         sb.append("<html><body>")
-                .append("<h2> Hi! ").append(name).append("</h2>")
-                .append("<h3>").append(title).append("</h3>")
+                .append("<h2>").append(title).append("</h2>")
+                .append("<h3> Hi! ").append(name).append("</h3>")
                 .append("<p>").append(message).append("</p>");
 
         if (token != null && !token.isEmpty()) {
@@ -134,12 +134,12 @@ public class EmailService {
         String title = (String) contents.getOrDefault("title", "Notification");
         String message = (String) contents.getOrDefault("message", "Please review the details below.");
         String token = (String) contents.get("token");
-        String link = "http://localhost:8080/auth/reset-password/process?token=" + token;
+        String link = "http://localhost:8088/api/v1/auth/reset-password/process?token=" + token;
         String expiry = String.valueOf(contents.getOrDefault("expiry", "10"));
 
         StringBuilder sb = new StringBuilder();
         sb.append("<html><body>")
-                .append("<h3>").append(title).append("</h3>")
+                .append("<h2>").append(title).append("</h2>")
                 .append("<p>").append(message).append("</p>");
 
         if (token != null && !token.isEmpty()) {
